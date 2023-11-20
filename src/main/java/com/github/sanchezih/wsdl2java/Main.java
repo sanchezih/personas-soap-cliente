@@ -16,7 +16,7 @@ public class Main {
 
 		final PersonasSEI soap = service.getPersonasServiceImplPort();
 
-		Persona persona = soap.getPersona("Ignacio");
+		Persona persona = soap.getPersona("Juan");
 
 		System.out.println("El apellido es: " + persona.apellido);
 
