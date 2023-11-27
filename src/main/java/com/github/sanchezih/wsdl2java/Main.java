@@ -3,22 +3,43 @@ package com.github.sanchezih.wsdl2java;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.util.List;
 
 public class Main {
 
 	public static void main(final String[] args) throws MalformedURLException, Exception_Exception {
 
-		final String endpoint = "http://localhost:8080/personas-soap-service/services/PersonasServiceImplPort";
+		String endpoint = "http://localhost:8080/personas-soap-service/services/PersonasServiceImplPort";
 
-		final URL url = URI.create(endpoint).toURL();
+		URL url = URI.create(endpoint).toURL();
 
-		final PersonasServiceImplService service = new PersonasServiceImplService(url);
+		PersonasServiceImplService service = new PersonasServiceImplService(url);
 
-		final PersonasSEI soap = service.getPersonasServiceImplPort();
+		PersonasSEI personasSEI = service.getPersonasServiceImplPort();
 
-		Persona persona = soap.getPersona("Juan");
+		/*----------------------------------------------------------------------------*/
 
-		System.out.println("El apellido es: " + persona.apellido);
+		Persona maria = new Persona();
+		maria.setNombre("Maria");
+		maria.setApellido("Gomez");
+
+		Persona juan = new Persona();
+		juan.setNombre("Juan");
+		juan.setApellido("Perez");
+
+		// Se agregan personas al conjunto
+		personasSEI.addPersona(maria);
+		personasSEI.addPersona(juan);
+
+		/*----------------------------------------------------------------------------*/
+
+		// Se obtienen todas las personas del conjunto
+		List<Persona> personas = personasSEI.getPersonas();
+		for (Persona persona : personas) {
+			System.out.println(persona.getNombre());
+		}
+
+		/*----------------------------------------------------------------------------*/
 
 	}
 }
