@@ -19,6 +19,7 @@ public class Main {
 
 		/*----------------------------------------------------------------------------*/
 
+		// Creacion de las personas
 		Persona maria = new Persona();
 		maria.setNombre("Maria");
 		maria.setApellido("Gomez");
